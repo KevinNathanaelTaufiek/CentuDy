@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c122c3f28c45451d816d03d89567037d" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.Cart" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.DetailTransaction" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.HeaderTransaction" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Medicine" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Role" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK__Cart__MedicineId__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__Cart__UserId__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__DetailTra__Medic__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__DetailTra__Trans__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__HeaderTra__UserI__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK__User__RoleId__2A4B4B5E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

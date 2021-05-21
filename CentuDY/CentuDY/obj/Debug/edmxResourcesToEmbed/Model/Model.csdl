@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="MedicineId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="MedicineId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Medicine" Relationship="Self.FK__Cart__MedicineId__300424B4" FromRole="Cart" ToRole="Medicine" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Cart__UserId__2F10007B" FromRole="Cart" ToRole="User" />
+  </EntityType>
+  <EntityType Name="DetailTransaction">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+      <PropertyRef Name="MedicineId" />
+    </Key>
+    <Property Name="TransactionId" Type="Int32" Nullable="false" />
+    <Property Name="MedicineId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Medicine" Relationship="Self.FK__DetailTra__Medic__36B12243" FromRole="DetailTransaction" ToRole="Medicine" />
+    <NavigationProperty Name="HeaderTransaction" Relationship="Self.FK__DetailTra__Trans__35BCFE0A" FromRole="DetailTransaction" ToRole="HeaderTransaction" />
+  </EntityType>
+  <EntityType Name="HeaderTransaction">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="DetailTransactions" Relationship="Self.FK__DetailTra__Trans__35BCFE0A" FromRole="HeaderTransaction" ToRole="DetailTransaction" />
+    <NavigationProperty Name="User" Relationship="Self.FK__HeaderTra__UserI__32E0915F" FromRole="HeaderTransaction" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Medicine">
+    <Key>
+      <PropertyRef Name="MedicineId" />
+    </Key>
+    <Property Name="MedicineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__MedicineId__300424B4" FromRole="Medicine" ToRole="Cart" />
+    <NavigationProperty Name="DetailTransactions" Relationship="Self.FK__DetailTra__Medic__36B12243" FromRole="Medicine" ToRole="DetailTransaction" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__User__RoleId__2A4B4B5E" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__UserId__2F10007B" FromRole="User" ToRole="Cart" />
+    <NavigationProperty Name="HeaderTransactions" Relationship="Self.FK__HeaderTra__UserI__32E0915F" FromRole="User" ToRole="HeaderTransaction" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__User__RoleId__2A4B4B5E" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK__Cart__MedicineId__300424B4">
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="MedicineId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="MedicineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__UserId__2F10007B">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetailTra__Medic__36B12243">
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="DetailTransaction" Type="Self.DetailTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="MedicineId" />
+      </Principal>
+      <Dependent Role="DetailTransaction">
+        <PropertyRef Name="MedicineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetailTra__Trans__35BCFE0A">
+    <End Role="HeaderTransaction" Type="Self.HeaderTransaction" Multiplicity="1" />
+    <End Role="DetailTransaction" Type="Self.DetailTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HeaderTransaction">
+        <PropertyRef Name="TransactionId" />
+      </Principal>
+      <Dependent Role="DetailTransaction">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HeaderTra__UserI__32E0915F">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="HeaderTransaction" Type="Self.HeaderTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="HeaderTransaction">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__RoleId__2A4B4B5E">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carts" EntityType="Self.Cart" />
+    <EntitySet Name="DetailTransactions" EntityType="Self.DetailTransaction" />
+    <EntitySet Name="HeaderTransactions" EntityType="Self.HeaderTransaction" />
+    <EntitySet Name="Medicines" EntityType="Self.Medicine" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Cart__MedicineId__300424B4" Association="Self.FK__Cart__MedicineId__300424B4">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__UserId__2F10007B" Association="Self.FK__Cart__UserId__2F10007B">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetailTra__Medic__36B12243" Association="Self.FK__DetailTra__Medic__36B12243">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="DetailTransaction" EntitySet="DetailTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetailTra__Trans__35BCFE0A" Association="Self.FK__DetailTra__Trans__35BCFE0A">
+      <End Role="HeaderTransaction" EntitySet="HeaderTransactions" />
+      <End Role="DetailTransaction" EntitySet="DetailTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HeaderTra__UserI__32E0915F" Association="Self.FK__HeaderTra__UserI__32E0915F">
+      <End Role="User" EntitySet="Users" />
+      <End Role="HeaderTransaction" EntitySet="HeaderTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__RoleId__2A4B4B5E" Association="Self.FK__User__RoleId__2A4B4B5E">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
