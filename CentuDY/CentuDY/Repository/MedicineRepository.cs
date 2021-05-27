@@ -9,12 +9,8 @@ namespace CentuDY.Repository
 {
     public class MedicineRepository
     {
-        private static readonly DatabaseEntities db = new DatabaseEntities();
+        private static DatabaseEntities db = new DatabaseEntities();
         
-        public static List<Medicine> getAllMedicines()
-        {
-            return db.Medicines.ToList();
-        }
 
         public static Medicine getMedicinesById(int medicineId)
         {
@@ -23,12 +19,18 @@ namespace CentuDY.Repository
 
         public static List<Medicine> getRekomen()
         {
-            List<Medicine> all = getAllMedicines();
+            List<Medicine> all = getAllMedicine();
 
             return all.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         }
+        public static List<Medicine> getAllMedicine()
+        {
+            DatabaseEntities a = new DatabaseEntities();
+            List<Medicine> medicines = a.Medicines.ToList();
+            return medicines;
+        }
 
-            public static List<Medicine> getMedicinesByName(String name)
+        public static List<Medicine> getMedicinesByName(String name)
         {
             List<Medicine> meds = (from x in db.Medicines
                                    where x.Name.Contains(name)

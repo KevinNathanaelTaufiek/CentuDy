@@ -24,7 +24,7 @@
     </Key>
     <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="TransactionDate" Type="date" Nullable="false" />
+    <Property Name="TransactionDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Medicine">
     <Key>

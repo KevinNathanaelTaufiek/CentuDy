@@ -14,12 +14,13 @@ namespace CentuDY.View
         public String roleUser;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!Page.IsPostBack)
             {
+                fetchData();
                 if (Session["user"] == null)
                 {
                     Response.Redirect("Loginpage.aspx");
-
                 }
                 else
                 {
@@ -27,11 +28,21 @@ namespace CentuDY.View
                     User user = (User)Session["user"];
 
                     int userId = user.UserId;
+                    
                     roleUser = UserController.getUserRoleName(userId);
+
+                    if (roleUser.Equals("Administrator"))
+                    {
+                        gvMedicine.Columns[6].Visible = false;
+                    }
+                    if (roleUser.Equals("Member"))
+                    {
+                        gvMedicine.Columns[0].Visible = false;
+                        gvMedicine.Columns[1].Visible = false;
+                    }
 
                 }
 
-                fetchData();
             }
         }
 

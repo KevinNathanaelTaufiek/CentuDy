@@ -11,7 +11,7 @@ namespace CentuDY.Handler
     {
         public static List<Medicine> getAllMedicine()
         {
-            return MedicineRepository.getAllMedicines();
+            return MedicineRepository.getAllMedicine();
         }
 
         public static Medicine getMedicineById(int id)

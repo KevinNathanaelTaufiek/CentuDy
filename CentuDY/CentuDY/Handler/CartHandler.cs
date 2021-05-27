@@ -42,7 +42,7 @@ namespace CentuDY.Handler
 
         public static int checkoutHeader(int userId)
         {
-            DateTime date = DateTime.Today;
+            DateTime date = DateTime.Now;
             return CartRepository.checkoutHeader(userId, date);
         }
         public static void checkoutDetail(int transactionId, int medicineId, int qty)

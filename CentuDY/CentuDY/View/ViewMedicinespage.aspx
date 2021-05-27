@@ -47,7 +47,7 @@
             </asp:GridView>
             <br />
             <% if(roleUser.Equals("Administrator"))
-                        { %>
+               { %>
             <asp:Button Text="Insert" ID="btnInsert" OnClick="btnInsert_Click" runat="server" />
             <% } %>
         <asp:Label Text="" ID="lblErr" runat="server" />

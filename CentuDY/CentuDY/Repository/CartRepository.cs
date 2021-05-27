@@ -77,12 +77,12 @@ namespace CentuDY.Repository
         {
             DetailTransaction dt = TransactionFactory.createDetailTransaction(transactionId, medicineId, qty);
             db.DetailTransactions.Add(dt);
-            db.SaveChanges();
 
-            Medicine m = MedicineRepository.getMedicinesById(medicineId);
+            Medicine m = (from x in db.Medicines where x.MedicineId == medicineId select x).First();
             m.Stock -= qty;
             db.SaveChanges();
         }
+
 
         public static void removeAllCart(int userId)
         {

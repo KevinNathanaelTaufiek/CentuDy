@@ -68,7 +68,7 @@ namespace CentuDY.View
 
         protected void btnTransReport_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("ViewTransactionReportpage.aspx");
         }
 
         protected void btnViewCart_Click(object sender, EventArgs e)

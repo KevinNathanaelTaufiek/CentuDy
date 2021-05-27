@@ -15,7 +15,7 @@
                 <Columns>
                     <asp:BoundField DataField="MedicineName" HeaderText="Medicine Name" SortExpression="Name" />
                     <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" />
-                    <asp:BoundField DataField="Date" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Date" SortExpression="Date" />
+                    <asp:BoundField DataField="Date"  HeaderText="Date" SortExpression="Date" />
                     <asp:BoundField DataField="SubTotal" HeaderText="Sub Total" SortExpression="SubTotal" />
                 </Columns>
             </asp:GridView>

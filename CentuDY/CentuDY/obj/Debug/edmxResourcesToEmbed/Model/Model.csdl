@@ -28,7 +28,7 @@
     </Key>
     <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="DetailTransactions" Relationship="Self.FK__DetailTra__Trans__35BCFE0A" FromRole="HeaderTransaction" ToRole="DetailTransaction" />
     <NavigationProperty Name="User" Relationship="Self.FK__HeaderTra__UserI__32E0915F" FromRole="HeaderTransaction" ToRole="User" />
   </EntityType>
