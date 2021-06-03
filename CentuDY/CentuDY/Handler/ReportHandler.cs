@@ -14,5 +14,16 @@ namespace CentuDY.Handler
         {
             return ReportRepository.GetTransactions();
         }
+
+        public static int GetDetailById(int transactionId)
+        {
+            var transaksi = ReportRepository.GetDetailById(transactionId);
+            int total=0;
+            foreach (var t in transaksi)
+            {
+                total += (t.Quantity * t.Medicine.Price);
+            }
+            return total;
+        }
     }
 }

@@ -43,6 +43,7 @@ namespace CentuDY.View
                 rowHeader["TransactionId"] = i.TransactionId;
                 rowHeader["UserId"] = i.UserId;
                 rowHeader["TransactionDate"] = i.TransactionDate;
+                rowHeader["GrandTotal"] = ReportController.GetTotalById(i.TransactionId);
                 header.Rows.Add(rowHeader);
 
                 foreach (DetailTransaction j in i.DetailTransactions)
@@ -51,6 +52,8 @@ namespace CentuDY.View
                     rowDetail["TransactionId"] = j.TransactionId;
                     rowDetail["MedicineId"] = j.MedicineId;
                     rowDetail["Quantity"] = j.Quantity;
+                    rowDetail["Price"] = j.Medicine.Price;
+                    rowDetail["SubTotal"] = j.Quantity * j.Medicine.Price;
 
                     foreach (Medicine x in med)
                     {

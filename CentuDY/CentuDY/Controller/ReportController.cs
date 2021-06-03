@@ -13,5 +13,10 @@ namespace CentuDY.Controller
         {
             return ReportHandler.GetTransactions();
         }
+
+        public static int GetTotalById(int transactionId)
+        {
+            return ReportHandler.GetDetailById(transactionId);
+        }
     }
 }

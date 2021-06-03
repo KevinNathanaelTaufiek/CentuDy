@@ -15,5 +15,13 @@ namespace CentuDY.Repository
             return db.HeaderTransactions.ToList();
         }
 
+        public static List<DetailTransaction> GetDetailById(int transactionId)
+        {
+            var transaksi = (from x in db.DetailTransactions
+                             where x.TransactionId == transactionId
+                             select x).ToList();
+            return transaksi;
+        }
+
     }
 }
